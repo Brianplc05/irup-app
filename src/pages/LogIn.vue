@@ -13,12 +13,18 @@
                 <div class="welcome-title">Welcome Back!</div>
 
                 <div class="welcome-subtitle">
-                  This site is for admin members to report every progress of information that has been obtained.
+                  This site is for admin members to report every progress of
+                  information that has been obtained.
                 </div>
               </div>
 
               <q-form class="q-mt-md" @submit.prevent="login">
-                <q-input outlined v-model="EmployeeCode" label="Employee Number" class="q-mb-md">
+                <q-input
+                  outlined
+                  v-model="EmployeeCode"
+                  label="Employee Number"
+                  class="q-mb-md"
+                >
                   <template v-slot:prepend>
                     <q-icon name="person" class="q-pa-sm" />
                   </template>
@@ -81,11 +87,11 @@ export default {
   },
 
   methods: {
-    async login () {
+    async login() {
       try {
         // trim para kahit may spaces lang
-        const emp = this.EmployeeCode?.trim()
-        const pass = this.WebPassword?.trim()
+        const emp = this.EmployeeCode?.trim();
+        const pass = this.WebPassword?.trim();
 
         // 🔴 EARLY VALIDATION (undefined / empty / null)
         if (!emp || !pass) {
@@ -94,30 +100,27 @@ export default {
             position: "top",
             message: "PLEASE ENTER BOTH EMPLOYEE NUMBER AND PASSWORD",
             icon: "report_problem",
-            timeout: 2000
-          })
-          return
+            timeout: 2000,
+          });
+          return;
         }
 
         const logs = {
           EmployeeCode: emp,
-          WebPassword: pass
-        }
+          WebPassword: pass,
+        };
 
-        const response = await this.$store.dispatch("ApplyStore/Login", logs)
+        const response = await this.$store.dispatch("ApplyStore/Login", logs);
 
-        this.$router.push("/auth-loading")
-
+        this.$router.push("/auth-loading");
       } catch (error) {
-
         this.$q.notify({
           color: "negative",
           position: "top",
-          message:
-            "INCORRECT EMPLOYEE NUMBER & PASSWORD",
+          message: "INCORRECT EMPLOYEE NUMBER & PASSWORD",
           icon: "report_problem",
-          timeout: 2000
-        })
+          timeout: 2000,
+        });
       }
     },
 

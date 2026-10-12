@@ -61,16 +61,17 @@ module.exports = configure(function (/* ctx */) {
 
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
 
-      publicPath: '/irms-app',
+      publicPath: "/irms-app",
       // analyze: true,
       env: {
         // ACCESS_RIGHT_API_URL: "https://localapi.uerm.edu.ph:8081/access-right",
         // ACCESS_RIGHT_API_URL: "http://20.14.20.231:3000/access-right",
-        BACKEND_REST_API_URL: "http://10.107.0.30:8000",
-        // BACKEND_REST_API_URL: 'http://20.14.20.166',
+        // BACKEND_REST_API_URL: "http://10.107.0.30:8000",
+        BACKEND_REST_API_URL: "http://20.14.20.166:3000",
         // BACKEND_REST_API_URL: "https://localapi.uerm.edu.ph:8081/",
         // BACKEND_REST_API_URL: "http://10.107.0.30:8888",
-        IMAGE_REST_API_URL: "https://localapi.uerm.edu.ph:8081/personnels/picture/",
+        IMAGE_REST_API_URL:
+          "https://localapi.uerm.edu.ph:8081/personnels/picture/",
       },
       // rawDefine: {}
       // ignorePublicFolder: true,

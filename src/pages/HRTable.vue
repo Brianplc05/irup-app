@@ -1,27 +1,23 @@
 <template>
   <div id="q-app" style="position: relative; z-index: 1">
     <div style="height: 100%; width: 100%" class="q-pa-lg">
-      <q-card
-        class="dashboard-header"
-        style="border: 2px solid #e0e0e0;"
-      >
+      <q-card class="dashboard-header" style="border: 2px solid #e0e0e0">
         <q-card-section class="row items-center no-wrap">
           <div class="row items-center no-wrap">
             <div class="icon-wrapper">
-              <q-icon
-                name="dashboard"
-                size="35px"
-                color="primary"
-              />
+              <q-icon name="chrome_reader_mode" size="35px" color="primary" />
             </div>
 
             <div class="q-ml-md text-left">
-              <div class="text-h5 text-weight-medium text-primary text-uppercase">
+              <div
+                class="text-h5 text-weight-medium text-primary text-uppercase"
+              >
                 HUMAN RESOURCES MODULE
               </div>
 
               <div class="text-grey-7 q-mt-xs">
-                Welcome to the Incident Reporting & Unified Platform (IRUP) Human Resources!
+                Welcome to the Incident Reporting & Unified Platform (IRUP)
+                Human Resources!
               </div>
 
               <div class="accent-line q-mt-sm"></div>
@@ -30,154 +26,154 @@
         </q-card-section>
       </q-card>
 
-      <q-card
-        class="dashboard-header q-mt-md q-pa-sm"
-        flat
-        bordered
-      >
-          <q-card-section
-              v-if="loading"
-              class="fixed-full flex flex-center column q-gutter-md"
-              style="background-color: rgba(255, 255, 255, 0.7); z-index: 9999"
+      <q-card class="dashboard-header q-mt-md q-pa-sm" flat bordered>
+        <q-card-section
+          v-if="loading"
+          class="fixed-full flex flex-center column q-gutter-md"
+          style="background-color: rgba(255, 255, 255, 0.7); z-index: 9999"
+        >
+          <q-spinner-ball size="150px" color="primary" />
+          <div class="text-subtitle1 text-primary">Please wait...</div>
+        </q-card-section>
+
+        <q-card-section style="border: 2px solid #e0e0e0">
+          <q-toolbar
+            class="bg-grey-1"
+            style="border: 2px solid #f0f2f5; border-radius: 10px"
           >
-              <q-spinner-ball size="150px" color="primary" />
-              <div class="text-subtitle1 text-primary">Please wait...</div>
-          </q-card-section>
-
-          <q-card-section style="border: 2px solid #e0e0e0;">
-            <q-toolbar
-              class="bg-grey-1"
-              style="border: 2px solid #f0f2f5; border-radius: 10px;"
+            <q-tabs
+              v-model="hrTab"
+              shrink
+              stretch
+              class="bg-grey-1 text-dark q-pa-xs"
+              active-color="black"
+              indicator-color="transparent"
             >
-              <q-tabs
-                v-model="hrTab"
-                shrink
-                stretch
-                class="bg-grey-1 text-dark q-pa-xs"
-                active-color="black"
-                indicator-color="transparent"
+              <q-tab
+                name="reportable"
+                stack
+                style="width: 350px"
+                :class="{ 'active-tab': hrTab === 'reportable' }"
               >
-                <q-tab
-                  name="reportable"
-                  stack
-                  style="width: 350px"
-                  :class="{ 'active-tab': hrTab === 'reportable' }"
+                <template v-slot:default>
+                  <div class="column items-center q-mr-md">
+                    <div>Reportable Incident</div>
+                  </div>
+                </template>
+              </q-tab>
+
+              <q-tab
+                name="hrReferral"
+                stack
+                style="width: 350px"
+                :class="{ 'active-tab': hrTab === 'hrReferral' }"
+              >
+                <template v-slot:default>
+                  <div class="column items-center q-pa-sm q-mr-md">
+                    <div>Human Resources (HR) Referral</div>
+                  </div>
+                </template>
+              </q-tab>
+            </q-tabs>
+          </q-toolbar>
+
+          <q-tab-panels v-model="hrTab" animated class="tab-panels-bordered">
+            <q-tab-panel name="reportable">
+              <q-card-section class="row items-center justify-end q-gutter-sm">
+                <!-- SEARCH -->
+                <q-input
+                  v-model="searchRepQuery"
+                  label="SEARCH"
+                  dense
+                  outlined
+                  class="search-input"
                 >
-                  <template v-slot:default>
-                    <div class="column items-center q-mr-md">
-                      <div>Reportable Incident</div>
-                    </div>
+                  <template v-slot:append>
+                    <q-icon name="search" color="info" />
                   </template>
-                </q-tab>
+                </q-input>
 
-                <q-tab
-                  name="hrReferral"
-                  stack
-                  style="width: 350px"
-                  :class="{ 'active-tab': hrTab === 'hrReferral' }"
+                <!-- FILTER -->
+                <q-btn-dropdown
+                  color="secondary"
+                  :label="selectedAreaValue?.division || 'FILTER AREA'"
+                  split
+                  class="filter-btn"
                 >
-                  <template v-slot:default>
-                    <div class="column items-center q-pa-sm q-mr-md">
-                      <div>Human Resources (HR) Referral</div>
-                    </div>
+                  <q-list>
+                    <q-item
+                      v-for="option in areaValueOptions"
+                      :key="option.divisionCode"
+                      clickable
+                      @click="selectArea(option)"
+                    >
+                      <q-item-section>{{ option.division }}</q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-btn-dropdown>
+              </q-card-section>
+
+              <hrRepComponentsTable
+                v-show="showTable"
+                :items="filteredRepDisAll"
+                :pagination="{ rowsPerPage: 8 }"
+                :columns="disRepColumns"
+                style="border-collapse: collapse; border-radius: 10px"
+                :loading="loading"
+              />
+            </q-tab-panel>
+
+            <q-tab-panel name="hrReferral">
+              <q-card-section class="row items-center justify-end q-gutter-sm">
+                <!-- SEARCH -->
+                <q-input
+                  v-model="searchRefQuery"
+                  label="SEARCH"
+                  dense
+                  outlined
+                  class="search-input"
+                >
+                  <template v-slot:append>
+                    <q-icon name="search" color="info" />
                   </template>
-                </q-tab>
-              </q-tabs>
-            </q-toolbar>
+                </q-input>
 
-            <q-tab-panels v-model="hrTab" animated class="tab-panels-bordered" >
-              <q-tab-panel name="reportable">
-                <q-card-section
-                  class="row items-center justify-end q-gutter-sm"
+                <!-- FILTER -->
+                <q-btn-dropdown
+                  color="secondary"
+                  :label="selectedAreaValue?.division || 'FILTER AREA'"
+                  split
+                  class="filter-btn"
                 >
-                  <!-- SEARCH -->
-                  <q-input
-                    v-model="searchRepQuery"
-                    label="SEARCH"
-                    dense
-                    outlined
-                    class="search-input"
-                  >
-                    <template v-slot:append>
-                      <q-icon name="search" color="info" />
-                    </template>
-                  </q-input>
+                  <q-list>
+                    <q-item
+                      v-for="option in areaValueOptions"
+                      :key="option.divisionCode"
+                      clickable
+                      @click="selectArea(option)"
+                    >
+                      <q-item-section>{{ option.division }}</q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-btn-dropdown>
+              </q-card-section>
 
-                  <!-- FILTER -->
-                  <q-btn-dropdown
-                    color="secondary"
-                    :label="selectedAreaValue?.division || 'FILTER AREA'"
-                    split
-                    class="filter-btn"
-                  >
-                    <q-list>
-                      <q-item v-for="option in areaValueOptions" :key="option.divisionCode" clickable @click="selectArea(option)">
-                        <q-item-section>{{ option.division }}</q-item-section>
-                      </q-item>
-                    </q-list>
-                  </q-btn-dropdown>
-
-                </q-card-section>
-
-                <hrRepComponentsTable
-                  v-show="showTable"
-                  :items="filteredRepDisAll"
-                  :pagination="{ rowsPerPage: 8 }"
-                  :columns="disRepColumns"
-                  style="border-collapse: collapse; border-radius: 10px;"
-                  :loading="loading"
-                />
-              </q-tab-panel>
-
-              <q-tab-panel name="hrReferral">
-                <q-card-section
-                  class="row items-center justify-end q-gutter-sm"
-                >
-                  <!-- SEARCH -->
-                  <q-input
-                    v-model="searchRefQuery"
-                    label="SEARCH"
-                    dense
-                    outlined
-                    class="search-input"
-                  >
-                    <template v-slot:append>
-                      <q-icon name="search" color="info" />
-                    </template>
-                  </q-input>
-
-                  <!-- FILTER -->
-                  <q-btn-dropdown
-                    color="secondary"
-                    :label="selectedAreaValue?.division || 'FILTER AREA'"
-                    split
-                    class="filter-btn"
-                  >
-                    <q-list>
-                      <q-item v-for="option in areaValueOptions" :key="option.divisionCode" clickable @click="selectArea(option)">
-                        <q-item-section>{{ option.division }}</q-item-section>
-                      </q-item>
-                    </q-list>
-                  </q-btn-dropdown>
-
-                </q-card-section>
-
-                <hrRefComponentsTable
-                  v-show="showTable"
-                  :items="filteredRefDisAll"
-                  :pagination="{ rowsPerPage: 8 }"
-                  :columns="disRefColumns"
-                  :hrStats="hrStats"
-                  :disCod="disCod"
-                  :disSpeOF="disSpeOF"
-                  :Occurrences="Occurrences"
-                  :Penalty="Penalty"
-                  style="border-collapse: collapse"
-                  :loading="loading"
-                />
-              </q-tab-panel>
-            </q-tab-panels>
-          </q-card-section>
+              <hrRefComponentsTable
+                v-show="showTable"
+                :items="filteredRefDisAll"
+                :pagination="{ rowsPerPage: 8 }"
+                :columns="disRefColumns"
+                :hrStats="hrStats"
+                :disCod="disCod"
+                :disSpeOF="disSpeOF"
+                :Occurrences="Occurrences"
+                :Penalty="Penalty"
+                style="border-collapse: collapse"
+                :loading="loading"
+              />
+            </q-tab-panel>
+          </q-tab-panels>
+        </q-card-section>
       </q-card>
     </div>
   </div>
@@ -205,7 +201,7 @@ export default {
     return {
       loading: true,
       showTable: false,
-      hrTab: 'reportable', // default active tab
+      hrTab: "reportable", // default active tab
 
       disRepAll: [],
       disRefAll: [],
@@ -247,8 +243,8 @@ export default {
           name: "divisionCode",
           label: "AREA",
           align: "left",
-          field: "divisionCode"
-        }
+          field: "divisionCode",
+        },
         // { name: 'qaref', label: 'HR EVALUATION', align: 'left', field: 'QAReferral,' },
         // {
         //   name: "financialLia",
@@ -298,8 +294,8 @@ export default {
           name: "divisionCode",
           label: "AREA",
           align: "left",
-          field: "divisionCode"
-        }
+          field: "divisionCode",
+        },
       ],
 
       hrStats: [
@@ -339,7 +335,7 @@ export default {
         { division: "ACADEME", divisionCode: "ACD-01" },
         { division: "ADMIN", divisionCode: "ADM-03" },
         { division: "HOSPITAL", divisionCode: "HST-02" },
-      ]
+      ],
     };
   },
 
@@ -352,7 +348,8 @@ export default {
     }),
 
     filteredRefDisAll() {
-      const { disRefAll, selectedStatus, selectedAreaValue, searchRefQuery } = this;
+      const { disRefAll, selectedStatus, selectedAreaValue, searchRefQuery } =
+        this;
       let filteredData = [...disRefAll];
       if (selectedStatus && typeof selectedStatus === "object") {
         const { value: statusValue } = selectedStatus;
@@ -367,7 +364,6 @@ export default {
         );
       }
 
-
       if (searchRefQuery && typeof searchRefQuery === "string") {
         const query = searchRefQuery.toLowerCase();
         filteredData = filteredData.filter((item) =>
@@ -381,7 +377,12 @@ export default {
     },
 
     filteredRepDisAll() {
-      const { disRepAll, selectedRepStatus, selectedAreaValue, searchRepQuery } = this;
+      const {
+        disRepAll,
+        selectedRepStatus,
+        selectedAreaValue,
+        searchRepQuery,
+      } = this;
       let filteredData = [...disRepAll];
       if (selectedRepStatus && typeof selectedRepStatus === "object") {
         const { value: statusValue } = selectedRepStatus;
@@ -396,7 +397,6 @@ export default {
         );
       }
 
-
       if (searchRepQuery && typeof searchRepQuery === "string") {
         const query = searchRepQuery.toLowerCase();
         filteredData = filteredData.filter((item) =>
@@ -408,12 +408,11 @@ export default {
       }
       return filteredData;
     },
-
   },
 
   components: {
     hrRepComponentsTable: hrRepComponents,
-    hrRefComponentsTable: hrRefComponents
+    hrRefComponentsTable: hrRefComponents,
   },
 
   mounted() {

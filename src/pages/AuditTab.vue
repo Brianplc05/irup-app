@@ -2,27 +2,23 @@
   <div id="q-app" style="position: relative; z-index: 1">
     <div style="height: 100%; width: 100%" class="q-pa-lg">
       <!-- HEADER -->
-      <q-card
-        class="dashboard-header"
-        style="border: 2px solid #e0e0e0;"
-      >
+      <q-card class="dashboard-header" style="border: 2px solid #e0e0e0">
         <q-card-section class="row items-center no-wrap">
           <div class="row items-center no-wrap">
             <div class="icon-wrapper">
-              <q-icon
-                name="dashboard"
-                size="35px"
-                color="primary"
-              />
+              <q-icon name="assessment" size="35px" color="primary" />
             </div>
 
             <div class="q-ml-md text-left">
-              <div class="text-h5 text-weight-medium text-primary text-uppercase">
+              <div
+                class="text-h5 text-weight-medium text-primary text-uppercase"
+              >
                 REPORT MODULE
               </div>
 
               <div class="text-grey-7 q-mt-xs">
-                Welcome to the Incident Reporting & Unified Platform (IRUP) Report Module!
+                Welcome to the Incident Reporting & Unified Platform (IRUP)
+                Report Module!
               </div>
 
               <div class="accent-line q-mt-sm"></div>
@@ -43,31 +39,33 @@
       <!-- MAIN CARD -->
       <q-card
         class="dashboard-header q-mt-md q-pa-sm"
-        style="border: 2px solid #e0e0e0;"
+        style="border: 2px solid #e0e0e0"
       >
-        <q-card-section style="border: 2px solid #e0e0e0;">
-          <div class="filter-section ">
+        <q-card-section style="border: 2px solid #e0e0e0">
+          <div class="filter-section">
             <div class="report-section">
-              <div class="text-h5 text-weight-medium text-primary text-uppercase">
+              <div
+                class="text-h5 text-weight-medium text-primary text-uppercase"
+              >
                 INCIDENT REPORT HISTORY
               </div>
 
               <div class="text-grey-7 text-weight-medium">
                 Total Incident Report :
-                  <q-badge
-                    class="q-pa-sm text-bold"
-                    outline
-                    color="primary"
-                    style="font-size: 15px;"
-                  >
-                    {{ totalReport }}
-                  </q-badge>
+                <q-badge
+                  class="q-pa-sm text-bold"
+                  outline
+                  color="primary"
+                  style="font-size: 15px"
+                >
+                  {{ totalReport }}
+                </q-badge>
               </div>
             </div>
 
             <q-space />
 
-            <div class="filter-section ">
+            <div class="filter-section">
               <q-input
                 v-model="searchQuery"
                 label="SEARCH"
@@ -76,10 +74,7 @@
                 class="search-input"
               >
                 <template v-slot:append>
-                  <q-icon
-                    name="search"
-                    color="info"
-                  />
+                  <q-icon name="search" color="info" />
                 </template>
               </q-input>
 
@@ -125,7 +120,10 @@
             </div>
           </div>
 
-          <div class="q-mt-md" style="border: 2px solid #e0e0e0; border-radius: 10px;">
+          <div
+            class="q-mt-md"
+            style="border: 2px solid #e0e0e0; border-radius: 10px"
+          >
             <AuditTables
               v-show="showTable"
               :items="filteredDisAll"
@@ -135,7 +133,7 @@
               flat
               bordered
               class="my-custom-scroll"
-              style="border-radius: 10px;"
+              style="border-radius: 10px"
             />
           </div>
         </q-card-section>
@@ -158,7 +156,7 @@
 </template>
 
 <script>
-import AuditTables from "../components/AuditTable.vue"
+import AuditTables from "../components/AuditTable.vue";
 import { mapGetters } from "vuex";
 
 export default {
@@ -177,8 +175,18 @@ export default {
       disColumns: [
         { name: "viewIR", label: "INCIDENT REPORT DETAILS", align: "left" },
         { name: "IRNo", label: "IR NUMBER", align: "left", field: "iRNo" },
-        { name: "departmentNumber", label: "INCIDENT RESPONDER (DEPARTMENT)", align: "left", field: "department_Description" },
-        { name: "subject", label: "SUBJECT OF THE INCIDENT", align: "left", field: "subjectName" },
+        {
+          name: "departmentNumber",
+          label: "INCIDENT RESPONDER (DEPARTMENT)",
+          align: "left",
+          field: "department_Description",
+        },
+        {
+          name: "subject",
+          label: "SUBJECT OF THE INCIDENT",
+          align: "left",
+          field: "subjectName",
+        },
         {
           name: "topic",
           label: "TOPIC",
@@ -189,8 +197,8 @@ export default {
           name: "divisionCode",
           label: "AREA",
           align: "left",
-          field: "divisionCode"
-        }
+          field: "divisionCode",
+        },
       ],
 
       areaOptions: [
@@ -204,7 +212,7 @@ export default {
         { label: "OPEN", value: true },
         { label: "CLOSED", value: false },
       ],
-    }
+    };
   },
 
   computed: {
@@ -239,8 +247,7 @@ export default {
         filteredData = filteredData.filter((item) =>
           Object.values(item).some(
             (val) =>
-              typeof val === "string" &&
-              val.toLowerCase().includes(query)
+              typeof val === "string" && val.toLowerCase().includes(query)
           )
         );
       }
@@ -250,7 +257,7 @@ export default {
 
     totalReport() {
       return this.filteredDisAll.length;
-    }
+    },
   },
 
   mounted() {
@@ -266,7 +273,6 @@ export default {
       this.getInc();
     }, 60000);
   },
-
 
   created() {
     this.getInc();
@@ -301,12 +307,11 @@ export default {
     selectArea(option) {
       this.selectedArea = option;
     },
-  }
-}
+  },
+};
 </script>
 
 <style>
-
 /* ////////////////////  HEADER  /////////////////// */
 
 .dashboard-header {
@@ -478,5 +483,4 @@ export default {
   border: 0.1em solid #003566;
   background-color: #e3f2fd;
 }
-
 </style>

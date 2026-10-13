@@ -79,7 +79,7 @@ export default {
       // Remove the authentication token and user data from localStorage
       localStorage.removeItem("authToken");
       localStorage.removeItem("user");
-      localStorage.removeItem("getListModule")
+      localStorage.removeItem("getListModule");
       localStorage.removeItem("accessModules");
 
       // Commit the mutations separately
@@ -239,11 +239,7 @@ export default {
     }
   },
 
-
-
-
-
-/* CHECKING PART */
+  /* CHECKING PART */
 
   async displayCountParticular({ commit }, data) {
     try {
@@ -415,14 +411,11 @@ export default {
   async disDivision({ commit }) {
     try {
       const token = localStorage.getItem("authToken");
-      const response = await axios.get(
-        `${ApiUrl}/incident-report/division`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.get(`${ApiUrl}/incident-report/division`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       commit("GET_Division", response.data);
     } catch (error) {
       console.error("Failed to display Division:", error);
@@ -509,8 +502,6 @@ export default {
       throw error;
     }
   },
-
-
 
   ////////////////////////////////////////////
 
@@ -686,7 +677,6 @@ export default {
 
   //////////////QATABLE/////////////////
 
-
   async disIncQA({ commit }) {
     try {
       const token = localStorage.getItem("authToken");
@@ -783,14 +773,14 @@ export default {
     try {
       const token = localStorage.getItem("authToken");
       const response = await axios.put(
-          `${ApiUrl}/incident-report/AddReject`,
-          data,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        `${ApiUrl}/incident-report/AddReject`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       commit("GET_QAFORM", response.data);
     } catch (error) {
       console.error("ERROR", error);
@@ -835,12 +825,15 @@ export default {
   async disSaveDraftIrp({ commit }, data) {
     try {
       const token = localStorage.getItem("authToken");
-      const response = await axios.get(`${ApiUrl}/incident-report/DisplayDraftIRP`, {
-        params: data,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        `${ApiUrl}/incident-report/DisplayDraftIRP`,
+        {
+          params: data,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       commit("GET_QAIR", response.data);
     } catch (error) {
       console.error("ERROR", error);
@@ -851,12 +844,15 @@ export default {
   async disRCASaveDraftIrp({ commit }, data) {
     try {
       const token = localStorage.getItem("authToken");
-      const response = await axios.get(`${ApiUrl}/incident-report/DisplayRCAIRPDraftItem`, {
-        params: data,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        `${ApiUrl}/incident-report/DisplayRCAIRPDraftItem`,
+        {
+          params: data,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       commit("GET_QAIR", response.data);
     } catch (error) {
       console.error("ERROR", error);
@@ -1850,7 +1846,7 @@ export default {
     }
   },
 
-    async AccomplishDate({ commit }, data) {
+  async AccomplishDate({ commit }, data) {
     try {
       const token = localStorage.getItem("authToken");
       const response = await axios.put(
@@ -1953,7 +1949,6 @@ export default {
       throw error;
     }
   },
-
 
   async disHRRef({ commit }) {
     try {
@@ -2195,11 +2190,14 @@ export default {
   async disAreaTab({ commit }) {
     try {
       const token = localStorage.getItem("authToken");
-      const response = await axios.get(`${ApiUrl}/incident-report/DisplayAreaTab`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        `${ApiUrl}/incident-report/DisplayAreaTab`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       commit("GET_AREA", response.data);
     } catch (error) {
       console.error("ERROR", error);
@@ -2210,11 +2208,14 @@ export default {
   async disRequestAccess({ commit }) {
     try {
       const token = localStorage.getItem("authToken");
-      const response = await axios.get(`${ApiUrl}/incident-report/DisplayRequestAccess`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        `${ApiUrl}/incident-report/DisplayRequestAccess`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       commit("GET_ACCESS", response.data);
     } catch (error) {
       console.error("ERROR", error);
@@ -2225,11 +2226,14 @@ export default {
   async disDivTab({ commit }) {
     try {
       const token = localStorage.getItem("authToken");
-      const response = await axios.get(`${ApiUrl}/incident-report/DisplayDivisionTab`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        `${ApiUrl}/incident-report/DisplayDivisionTab`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       commit("GET_DIV", response.data);
     } catch (error) {
       console.error("ERROR", error);
@@ -2324,7 +2328,7 @@ export default {
     }
   },
 
-    async disFilterDivision({ commit }) {
+  async disFilterDivision({ commit }) {
     try {
       const token = localStorage.getItem("authToken");
       const response = await axios.get(
@@ -2437,7 +2441,7 @@ export default {
     }
   },
 
-    async addEditDeptContent({ commit }, data) {
+  async addEditDeptContent({ commit }, data) {
     try {
       const token = localStorage.getItem("authToken");
       const response = await axios.post(
@@ -2475,7 +2479,7 @@ export default {
     }
   },
 
-    async RemoveAreaContent({ commit }, payload) {
+  async RemoveAreaContent({ commit }, payload) {
     try {
       const token = localStorage.getItem("authToken");
       const response = await axios.put(
@@ -2513,7 +2517,7 @@ export default {
     }
   },
 
-    async RemoveRequestAccess({ commit }, payload) {
+  async RemoveRequestAccess({ commit }, payload) {
     try {
       const token = localStorage.getItem("authToken");
       const response = await axios.put(

@@ -1,7 +1,7 @@
 <template>
   <div id="q-app" style="position: relative; z-index: 1">
     <div style="height: 100%; width: 100%" class="q-pa-lg">
-      <q-card  class="dashboard-header" style="border: 2px solid #e0e0e0;">
+      <q-card class="dashboard-header" style="border: 2px solid #e0e0e0">
         <q-card-section class="row items-start no-wrap">
           <div class="icon-wrapper">
             <q-icon name="dashboard" size="35px" color="primary" />
@@ -13,7 +13,8 @@
             </div>
 
             <div class="text-grey-7 q-mt-xs">
-              Welcome to the Incident Reporting & Unified Platform (IRUP) Dashboard!
+              Welcome to the Incident Reporting & Unified Platform (IRUP)
+              Dashboard!
             </div>
 
             <div class="accent-line q-mt-sm"></div>
@@ -24,23 +25,27 @@
       <q-card bordered flat class="q-mt-md">
         <q-card-section class="dashboard-row">
           <!-- INCIDENT STATUS - 35% -->
-          <div class="incident-status-panel ">
+          <div class="incident-status-panel">
             <div class="dashboard-panel q-pa-sm">
-
-              <div class="text-h5 text-weight-medium text-primary text-uppercase text-center q-pt-sm">
+              <div
+                class="text-h5 text-weight-medium text-primary text-uppercase text-center q-pt-sm"
+              >
                 CAPA IMPLEMENTATION RATE
               </div>
 
               <div class="text-grey-7 q-mt-xs q-pa-sm">
                 <p>
-                  This section shows the percentage of Corrective and Preventive Actions (CAPA) that
-                  have been implemented based on the reported incidents. It provides an overview of the
-                  organization’s progress in addressing identified issues and ensuring that appropriate actions are completed.
+                  This section shows the percentage of Corrective and Preventive
+                  Actions (CAPA) that have been implemented based on the
+                  reported incidents. It provides an overview of the
+                  organization’s progress in addressing identified issues and
+                  ensuring that appropriate actions are completed.
                 </p>
 
                 <p class="q-mt-md">
-                  For more detailed information about the incidents and their corresponding CAPA actions,
-                  you may click <strong>“Download Incident Reports”</strong>.
+                  For more detailed information about the incidents and their
+                  corresponding CAPA actions, you may click
+                  <strong>“Download Incident Reports”</strong>.
                 </p>
 
                 <q-btn
@@ -57,24 +62,30 @@
                 >
                   <q-dialog v-model="downloadIR" persistent>
                     <q-card style="width: 1800px; max-width: 90vw">
-                      <q-card-section class="row items-center justify-between bg-primary text-white">
-                        <div class="text-h5 text-weight-medium text-white text-uppercase text-center">
+                      <q-card-section
+                        class="row items-center justify-between bg-primary text-white"
+                      >
+                        <div
+                          class="text-h5 text-weight-medium text-white text-uppercase text-center"
+                        >
                           GENERATE INCIDENT REPORT DETAILS
                         </div>
 
-                        <q-btn dense flat icon="close" v-close-popup @click="this.downloadIR = false">
+                        <q-btn
+                          dense
+                          flat
+                          icon="close"
+                          v-close-popup
+                          @click="this.downloadIR = false"
+                        >
                           <q-tooltip>Close</q-tooltip>
                         </q-btn>
                       </q-card-section>
 
                       <q-separator></q-separator>
 
-                      <q-card-section
-                        class="q-ma-md"
-                      >
-                        <div
-                          class="row q-col-gutter-md justify-start"
-                        >
+                      <q-card-section class="q-ma-md">
+                        <div class="row q-col-gutter-md justify-start">
                           <div class="col-12 col-md-4 col-lg-2">
                             <q-select
                               outlined
@@ -115,7 +126,6 @@
                             />
                           </div>
                         </div>
-
 
                         <q-table
                           flat
@@ -159,31 +169,41 @@
                             </q-td>
                           </template>
 
-                          <template v-slot:body-cell-actionCorrectiveDate1="props">
+                          <template
+                            v-slot:body-cell-actionCorrectiveDate1="props"
+                          >
                             <q-td :props="props">
                               {{ FormatDate(props.row.actionCorrectiveDate1) }}
                             </q-td>
                           </template>
 
-                          <template v-slot:body-cell-actionCorrectiveDate2="props">
+                          <template
+                            v-slot:body-cell-actionCorrectiveDate2="props"
+                          >
                             <q-td :props="props">
                               {{ FormatDate(props.row.actionCorrectiveDate2) }}
                             </q-td>
                           </template>
 
-                          <template v-slot:body-cell-actionCorrectiveDate3="props">
+                          <template
+                            v-slot:body-cell-actionCorrectiveDate3="props"
+                          >
                             <q-td :props="props">
                               {{ FormatDate(props.row.actionCorrectiveDate3) }}
                             </q-td>
                           </template>
 
-                          <template v-slot:body-cell-actionCorrectiveDate4="props">
+                          <template
+                            v-slot:body-cell-actionCorrectiveDate4="props"
+                          >
                             <q-td :props="props">
                               {{ FormatDate(props.row.actionCorrectiveDate4) }}
                             </q-td>
                           </template>
 
-                          <template v-slot:body-cell-actionCorrectiveDate5="props">
+                          <template
+                            v-slot:body-cell-actionCorrectiveDate5="props"
+                          >
                             <q-td :props="props">
                               {{ FormatDate(props.row.actionCorrectiveDate5) }}
                             </q-td>
@@ -191,7 +211,8 @@
 
                           <template v-slot:no-data>
                             <div class="text-center text-grey-7 q-pa-md">
-                              No incident reports found for the selected month and year.
+                              No incident reports found for the selected month
+                              and year.
                             </div>
                           </template>
                         </q-table>
@@ -203,11 +224,12 @@
             </div>
           </div>
 
-
           <!-- REPORTABLE INCIDENT - 65% -->
           <div class="reportable-incident-panel">
-            <div class="dashboard-panel ">
-              <div class="text-h5 text-weight-medium text-primary text-uppercase text-center q-pt-sm">
+            <div class="dashboard-panel">
+              <div
+                class="text-h5 text-weight-medium text-primary text-uppercase text-center q-pt-sm"
+              >
                 INCIDENT STATUS
               </div>
 
@@ -226,13 +248,16 @@
           <!-- CLOSURE -->
           <div class="closure-panel">
             <div class="dashboard-panel q-pa-sm">
-              <div class="text-h5 text-weight-medium text-primary text-uppercase text-center">
+              <div
+                class="text-h5 text-weight-medium text-primary text-uppercase text-center"
+              >
                 INCIDENT CLOSURE TURNAROUND TIME (TAT)
               </div>
 
               <div class="text-grey-7 text-center q-mt-xs q-pa-sm">
                 <p>
-                  Measures the average time taken to close an incident from the date it was reported.
+                  Measures the average time taken to close an incident from the
+                  date it was reported.
                 </p>
               </div>
 
@@ -243,14 +268,17 @@
           <!-- REPORTABLE -->
           <div class="reported-panel">
             <div class="dashboard-panel q-pa-sm">
-              <div class="text-h5 text-weight-medium text-primary text-uppercase text-center">
+              <div
+                class="text-h5 text-weight-medium text-primary text-uppercase text-center"
+              >
                 REPORTABLE INCIDENTS
               </div>
 
               <div class="text-grey-7 text-center q-mt-xs q-pa-sm">
                 <p>
-                  Any unusual, unplanned, or disruptive event, whether actual or potential, that poses
-                  or may pose a significant risk to the organization as defined by this policy.
+                  Any unusual, unplanned, or disruptive event, whether actual or
+                  potential, that poses or may pose a significant risk to the
+                  organization as defined by this policy.
                 </p>
               </div>
 
@@ -265,13 +293,16 @@
           <!-- DEPARTMENT INVOLVED -->
           <div class="reported-panel">
             <div class="dashboard-panel q-pa-sm">
-              <div class="text-h5 text-weight-medium text-primary text-uppercase text-center">
+              <div
+                class="text-h5 text-weight-medium text-primary text-uppercase text-center"
+              >
                 INCIDENTS PER DEPARTMENT
               </div>
 
               <div class="text-grey-7 text-center q-mt-xs q-pa-sm">
                 <p>
-                  Displays the number of reported incidents categorized by department.
+                  Displays the number of reported incidents categorized by
+                  department.
                 </p>
               </div>
 
@@ -282,13 +313,16 @@
           <!-- AGING -->
           <div class="aging-panel">
             <div class="dashboard-panel q-pa-sm">
-              <div class="text-h5 text-weight-medium text-primary text-uppercase text-center">
+              <div
+                class="text-h5 text-weight-medium text-primary text-uppercase text-center"
+              >
                 AVERAGE AGING OF OPEN INCIDENTS (DAYS)
               </div>
 
               <div class="text-grey-7 text-center q-mt-xs q-pa-sm">
                 <p>
-                  Measures the average number of days that incidents have remained open and unresolved.
+                  Measures the average number of days that incidents have
+                  remained open and unresolved.
                 </p>
               </div>
 
@@ -314,13 +348,13 @@
 </template>
 
 <script>
-import Stacked from '../components/Charts/StackedGraph.vue'
-import Pie from '../components/Charts/PieGraph.vue'
-import PieDepartment from 'src/components/Charts/PieDepartment.vue';
-import BarClosureTaT from 'src/components/Charts/BarClosureTaT.vue';
-import BarAgingTaT from 'src/components/Charts/BarAgingTaT.vue';
+import Stacked from "../components/Charts/StackedGraph.vue";
+import Pie from "../components/Charts/PieGraph.vue";
+import PieDepartment from "src/components/Charts/PieDepartment.vue";
+import BarClosureTaT from "src/components/Charts/BarClosureTaT.vue";
+import BarAgingTaT from "src/components/Charts/BarAgingTaT.vue";
 import { mapGetters } from "vuex";
-import { exportFile } from 'quasar';
+import { exportFile } from "quasar";
 
 export default {
   components: {
@@ -363,110 +397,110 @@ export default {
           name: "IRNo",
           label: "IRNUMBER",
           align: "left",
-          field: "iRNo"
+          field: "iRNo",
         },
         {
           name: "dept_Desc",
           label: "PRIMARY DEPARTMENT INVOLVED",
           align: "left",
-          field: "dept_Desc"
+          field: "dept_Desc",
         },
         {
           name: "subject",
           label: "REPORTABLE INCIDENT",
           align: "left",
-          field: "subjectName"
+          field: "subjectName",
         },
         {
           name: "subjectSpecificExam",
           label: "PARTICULAR INCIDENT",
           align: "left",
-          field: "subjectSpecificExam"
+          field: "subjectSpecificExam",
         },
         {
           name: "subjectDate",
           label: "INCIDENT DATE",
           align: "left",
-          field: "subjectDate"
+          field: "subjectDate",
         },
         {
           name: "dateTimeCreated",
           label: "DATE REPORTED",
           align: "left",
-          field: "dateTimeCreated"
+          field: "dateTimeCreated",
         },
         {
           name: "dateTimeRCA",
           label: "DATE OF RCA/CA",
           align: "left",
-          field: "dateTimeRCA"
+          field: "dateTimeRCA",
         },
         {
           name: "actionCorrective1",
           label: "ACTION 1 DETAILS",
           align: "left",
-          field: "actionCorrective1"
+          field: "actionCorrective1",
         },
         {
           name: "actionCorrectiveDate1",
           label: "ACTION 1 DONE",
           align: "left",
-          field: "actionCorrectiveDate1"
+          field: "actionCorrectiveDate1",
         },
         {
           name: "actionCorrective2",
           label: "ACTION 2 DETAILS",
           align: "left",
-          field: "actionCorrective2"
+          field: "actionCorrective2",
         },
         {
           name: "actionCorrectiveDate2",
           label: "ACTION 2 DONE",
           align: "left",
-          field: "actionCorrectiveDate2"
+          field: "actionCorrectiveDate2",
         },
         {
           name: "actionCorrective3",
           label: "ACTION 3 DETAILS",
           align: "left",
-          field: "actionCorrective3"
+          field: "actionCorrective3",
         },
         {
           name: "actionCorrectiveDate3",
           label: "ACTION 3 DONE",
           align: "left",
-          field: "actionCorrectiveDate3"
+          field: "actionCorrectiveDate3",
         },
         {
           name: "actionCorrective4",
           label: "ACTION 4 DETAILS",
           align: "left",
-          field: "actionCorrective4"
+          field: "actionCorrective4",
         },
         {
           name: "actionCorrectiveDate4",
           label: "ACTION 4 DONE",
           align: "left",
-          field: "actionCorrectiveDate4"
+          field: "actionCorrectiveDate4",
         },
         {
           name: "actionCorrective5",
           label: "ACTION 5 DETAILS",
           align: "left",
-          field: "actionCorrective5"
+          field: "actionCorrective5",
         },
         {
           name: "actionCorrectiveDate5",
           label: "ACTION 5 DONE",
           align: "left",
-          field: "actionCorrectiveDate5"
+          field: "actionCorrectiveDate5",
         },
       ],
 
       disCountRep: [],
       disCountClosureTaT: [],
       disCountAgingTaT: [],
-      disCountDepartmentInvolved: []
+      disCountDepartmentInvolved: [],
     };
   },
 
@@ -484,38 +518,34 @@ export default {
     incidentStatusSeries() {
       const data = Array.isArray(this.displayIncidentStatus)
         ? this.displayIncidentStatus
-        : []
+        : [];
 
       return [
         {
-          name: 'WITHOUT RCA/CA',
-          data: data.map(item =>
-            Number(item['wITHOUT RCA/CA']) || 0
+          name: "WITHOUT RCA/CA",
+          data: data.map((item) => Number(item["wITHOUT RCA/CA"]) || 0),
+        },
+        {
+          name: "WITH RCA/CA AS OF TO DATE",
+          data: data.map(
+            (item) => Number(item["wITH RCA/CA AS OF TO DATE"]) || 0
           ),
         },
         {
-          name: 'WITH RCA/CA AS OF TO DATE',
-          data: data.map(item =>
-            Number(item['wITH RCA/CA AS OF TO DATE']) || 0
-          ),
+          name: "RESOLVED AS OF TO DATE",
+          data: data.map((item) => Number(item["rESOLVED AS OF TO DATE"]) || 0),
         },
-        {
-          name: 'RESOLVED AS OF TO DATE',
-          data: data.map(item =>
-            Number(item['rESOLVED AS OF TO DATE']) || 0
-          ),
-        },
-      ]
+      ];
     },
 
     incidentStatusChartOptions() {
       const data = Array.isArray(this.displayIncidentStatus)
         ? this.displayIncidentStatus
-        : []
+        : [];
 
       return {
         chart: {
-          type: 'bar',
+          type: "bar",
           height: 350,
           stacked: true,
           toolbar: {
@@ -530,13 +560,13 @@ export default {
           bar: {
             horizontal: false,
             borderRadius: 10,
-            borderRadiusApplication: 'end',
+            borderRadiusApplication: "end",
 
             dataLabels: {
               total: {
                 enabled: true,
                 style: {
-                  fontSize: '13px',
+                  fontSize: "13px",
                   fontWeight: 900,
                 },
               },
@@ -545,21 +575,21 @@ export default {
         },
 
         xaxis: {
-          categories: data.map(item => item.mONTH),
+          categories: data.map((item) => item.mONTH),
         },
 
         yaxis: {
           min: 0,
           labels: {
-            formatter: val => Math.round(val),
+            formatter: (val) => Math.round(val),
           },
         },
 
         legend: {
-          position: 'top',
-          horizontalAlign: 'center',
+          position: "top",
+          horizontalAlign: "center",
           offsetY: 0,
-          fontSize: '12px',
+          fontSize: "12px",
           itemMargin: {
             horizontal: 8,
             vertical: 0,
@@ -573,7 +603,7 @@ export default {
         dataLabels: {
           enabled: false,
         },
-      }
+      };
     },
   },
 
@@ -588,34 +618,29 @@ export default {
   methods: {
     FormatDate(dateValue) {
       if (!dateValue) {
-        return '';
+        return "";
       }
 
       const date = new Date(dateValue);
 
       if (isNaN(date.getTime())) {
-        return '';
+        return "";
       }
 
       const options = {
-        year: 'numeric',
-        month: 'long',
-        day: '2-digit'
+        year: "numeric",
+        month: "long",
+        day: "2-digit",
       };
 
-      return date
-        .toLocaleDateString('en-US', options)
-        .toUpperCase();
+      return date.toLocaleDateString("en-US", options).toUpperCase();
     },
 
     async getCountIncidentStats() {
       try {
-        await this.$store.dispatch(
-          "ApplyStore/displayCountIncidentStatus"
-        );
+        await this.$store.dispatch("ApplyStore/displayCountIncidentStatus");
 
         this.displayIncidentStatus = this.getCountInstatus;
-
       } catch (error) {
         console.error("Error getting insert:", error);
       }
@@ -631,13 +656,10 @@ export default {
 
     async filterIncidentContent() {
       try {
-
         const payload = {
           month: this.selectedMonth,
           year: this.inputedYear,
         };
-
-        console.log('Filter payload:', payload);
 
         await this.$store.dispatch(
           "ApplyStore/displayCAPAIncidentStatus",
@@ -645,12 +667,8 @@ export default {
         );
 
         this.displayFilteredData = this.getFilteredData;
-
       } catch (error) {
-        console.error(
-          'Error loading risk details:',
-          error
-        );
+        console.error("Error loading risk details:", error);
       }
     },
 
@@ -659,27 +677,18 @@ export default {
     ================================ */
 
     wrapCsvValue(val, formatFn, row) {
-
-      let formatted =
-        formatFn !== void 0
-          ? formatFn(val, row)
-          : val;
+      let formatted = formatFn !== void 0 ? formatFn(val, row) : val;
 
       formatted =
-        formatted === void 0 || formatted === null
-          ? ''
-          : String(formatted);
+        formatted === void 0 || formatted === null ? "" : String(formatted);
 
       // Escape double quotes
-      formatted = formatted
-        .split('"')
-        .join('""');
+      formatted = formatted.split('"').join('""');
 
       return `"${formatted}"`;
     },
 
     exportTable() {
-
       // Get current columns
       const columns = this.disFilterColumns;
 
@@ -688,62 +697,43 @@ export default {
 
       // Create CSV content
       const content = [
-
         // COLUMN HEADERS
-        columns
-          .map(col =>
-            this.wrapCsvValue(col.label)
-          )
-          .join(','),
+        columns.map((col) => this.wrapCsvValue(col.label)).join(","),
 
         // ROW DATA
-        ...rows.map(row =>
+        ...rows.map((row) =>
           columns
-            .map(col =>
+            .map((col) =>
               this.wrapCsvValue(
-
-                typeof col.field === 'function'
+                typeof col.field === "function"
                   ? col.field(row)
-                  : row[
-                      col.field === void 0
-                        ? col.name
-                        : col.field
-                    ],
+                  : row[col.field === void 0 ? col.name : col.field],
 
                 col.format,
 
                 row
               )
             )
-            .join(',')
-        )
-
-      ].join('\r\n');
+            .join(",")
+        ),
+      ].join("\r\n");
 
       // Export CSV using Quasar
-      const status = exportFile(
-        'incident_report.csv',
-        content,
-        'text/csv'
-      );
+      const status = exportFile("incident_report.csv", content, "text/csv");
 
       // Browser download error
       if (status !== true) {
-
         this.$q.notify({
-          message: 'Browser denied file download...',
-          color: 'negative',
-          icon: 'warning'
+          message: "Browser denied file download...",
+          color: "negative",
+          icon: "warning",
         });
-
       } else {
-
         this.$q.notify({
-          message: 'Incident report exported successfully.',
-          color: 'positive',
-          icon: 'check_circle'
+          message: "Incident report exported successfully.",
+          color: "positive",
+          icon: "check_circle",
         });
-
       }
     },
 
@@ -751,22 +741,20 @@ export default {
       REPORTABLE INCIDENT COUNT
     ================================ */
 
-    async getCountReportable(){
+    async getCountReportable() {
       try {
         await this.$store.dispatch("ApplyStore/displayCountReport");
-        console.log("disCountRep:", this.getCountRep);
         this.disCountRep = this.getCountRep;
       } catch (error) {
         console.error("Error inserting data:", error);
       }
     },
 
-
     /* ================================
       CLOSURE TAT COUNT
     ================================ */
 
-    async getCountClosure(){
+    async getCountClosure() {
       try {
         await this.$store.dispatch("ApplyStore/displayCountClosureTAT");
         this.disCountClosureTaT = this.getCountClosureTaT;
@@ -779,7 +767,7 @@ export default {
       AGING TAT COUNT
     ================================ */
 
-    async getCountAging(){
+    async getCountAging() {
       try {
         await this.$store.dispatch("ApplyStore/displayCountAgingTAT");
         this.disCountAgingTaT = this.getCountAgingTaT;
@@ -792,7 +780,7 @@ export default {
       DEPARTMENT INVOLVED COUNT
     ================================ */
 
-    async getCountDepartmentInv(){
+    async getCountDepartmentInv() {
       try {
         await this.$store.dispatch("ApplyStore/displayCountDepartmentInvolved");
         this.disCountDepartmentInvolved = this.getCountDepartmentInvolved;
@@ -883,6 +871,4 @@ export default {
   width: 100%;
   min-height: 200px;
 }
-
-
 </style>
